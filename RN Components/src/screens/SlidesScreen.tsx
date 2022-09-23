@@ -8,13 +8,12 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import HeaderTitle from '../components/HeaderTitle';
 import Icon from 'react-native-vector-icons/Ionicons';
 import useAnimation from '../hooks/useAnimation';
 import {useNavigation} from '@react-navigation/native';
-import {StackScreenProps} from '@react-navigation/stack';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -48,12 +47,16 @@ const SlidesScreen = () => {
   const {opacity, FadeIn} = useAnimation();
   const navigation = useNavigation();
 
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
+
   const renderItem = (item: Slide) => {
     return (
       <View
         style={{
           flex: 1,
-          backgroundColor: 'white',
+          backgroundColor: colors.background,
           borderRadius: 5,
           padding: 40,
           justifyContent: 'center',
@@ -69,14 +72,15 @@ const SlidesScreen = () => {
         />
         <Text
           style={{
-            color: '#198754',
+            color: colors.primary,
             fontSize: 20,
             fontWeight: 'bold',
             alignSelf: 'flex-start',
           }}>
           {item.title}
         </Text>
-        <Text style={{color: 'black', fontSize: 15, alignSelf: 'flex-start'}}>
+        <Text
+          style={{color: colors.text, fontSize: 15, alignSelf: 'flex-start'}}>
           {item.desc}
         </Text>
       </View>
@@ -106,11 +110,13 @@ const SlidesScreen = () => {
         <Pagination
           dotsLength={items.length}
           activeDotIndex={activeIndex}
-          dotStyle={{width: 20, backgroundColor: '#198754'}}
+          dotStyle={{width: 20, backgroundColor: colors.primary}}
         />
         {isVisible ? (
           <Animated.View style={{opacity}}>
-            <TouchableOpacity style={styles.touchable} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={{...styles.touchable, backgroundColor: colors.primary}}
+              activeOpacity={0.8}>
               <Icon
                 name="chevron-forward-outline"
                 color="white"
@@ -132,7 +138,7 @@ export default SlidesScreen;
 const styles = StyleSheet.create({
   touchable: {
     flexDirection: 'row',
-    backgroundColor: '#198754',
+
     width: 40,
     height: 40,
     borderRadius: 10,

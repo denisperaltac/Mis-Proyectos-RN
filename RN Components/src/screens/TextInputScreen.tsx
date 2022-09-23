@@ -6,13 +6,18 @@ import {
   Text,
   RefreshControl,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import HeaderTitle from '../components/HeaderTitle';
 import styles from '../theme/appTheme';
 import CustomSwitch from '../components/CustomSwitch';
 import {useForm} from '../hooks/useForm';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const TextInputScreen = () => {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const {onChange, form, isSubs, setForm} = useForm({
@@ -50,26 +55,38 @@ const TextInputScreen = () => {
       <View style={styles.globalMargin}>
         <HeaderTitle title="Text Inputs" />
         <TextInput
-          style={stylesInput.inputStyle}
+          style={{
+            ...stylesInput.inputStyle,
+            color: colors.text,
+            backgroundColor: colors.primary,
+          }}
           placeholder="Ingrese su nombre"
-          placeholderTextColor="rgba(0,0,0,0.3)"
+          placeholderTextColor="rgba(0,0,0,0.5)"
           autoCorrect={false}
           autoCapitalize="words"
           onChangeText={value => onChange(value, 'name')}
         />
         <TextInput
-          style={stylesInput.inputStyle}
+          style={{
+            ...stylesInput.inputStyle,
+            color: colors.text,
+            backgroundColor: colors.primary,
+          }}
           placeholder="Ingrese su Email"
-          placeholderTextColor="rgba(0,0,0,0.3)"
+          placeholderTextColor="rgba(0,0,0,0.5)"
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={value => onChange(value, 'email')}
           keyboardType="email-address"
         />
         <TextInput
-          style={stylesInput.inputStyle}
+          style={{
+            ...stylesInput.inputStyle,
+            color: colors.text,
+            backgroundColor: colors.primary,
+          }}
           placeholder="Ingrese su teléfono"
-          placeholderTextColor="rgba(0,0,0,0.3)"
+          placeholderTextColor="rgba(0,0,0,0.5)"
           onChangeText={value => onChange(value, 'phone')}
           keyboardType="phone-pad"
         />
@@ -93,8 +110,6 @@ const stylesInput = StyleSheet.create({
   inputStyle: {
     height: 40,
     paddingHorizontal: 10,
-    color: 'black',
-
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'rgba(0,0,0,0.5)',

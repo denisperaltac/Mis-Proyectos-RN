@@ -1,8 +1,9 @@
 import {View, Text, SectionList} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import HeaderTitle from '../components/HeaderTitle';
 import styles from '../theme/appTheme';
 import ItemSeparator from '../components/ItemSeparator';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 interface Casas {
   casa: string;
@@ -79,6 +80,10 @@ const casas: Casas[] = [
 const CustomSectionList = () => {
   const [largo, setLargo] = useState(0);
 
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
+
   useEffect(() => {
     let contador = 0;
     casas.map(e => (contador = e.data.length + contador));
@@ -100,7 +105,9 @@ const CustomSectionList = () => {
             size={18}
           />
         )}
-        renderItem={({item}) => <Text style={{color: 'black'}}>{item}</Text>}
+        renderItem={({item}) => (
+          <Text style={{color: colors.text}}>{item}</Text>
+        )}
         stickySectionHeadersEnabled // Para que el titulo se arrastre!
         renderSectionHeader={({section}) => (
           <HeaderTitle title={section.casa} margin={10} size={25} />

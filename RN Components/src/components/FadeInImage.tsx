@@ -4,9 +4,10 @@ import useAnimation from '../hooks/useAnimation';
 
 interface Props {
   uri: string;
+  colores?: any;
 }
 
-const FadeInImage = ({uri}: Props) => {
+const FadeInImage = ({uri, colores}: Props) => {
   const {opacity, FadeIn} = useAnimation();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,7 +20,7 @@ const FadeInImage = ({uri}: Props) => {
       {isLoading && (
         <ActivityIndicator
           style={{position: 'absolute'}}
-          color="grey"
+          color={colores.primary}
           size={40}
         />
       )}

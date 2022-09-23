@@ -1,19 +1,15 @@
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  RefreshControl,
-} from 'react-native';
-import React, {useState} from 'react';
+import {View, FlatList, StyleSheet, ActivityIndicator} from 'react-native';
+import React, {useState, useContext} from 'react';
 import HeaderTitle from '../components/HeaderTitle';
-import styles from '../theme/appTheme';
 import FadeInImage from '../components/FadeInImage';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const InfiniteScroolScreen = () => {
   const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5]);
+
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   const loadMore = () => {
     const newArray: number[] = [];
@@ -27,11 +23,10 @@ const InfiniteScroolScreen = () => {
 
   const renderItem = (item: number) => {
     return (
-      // <Image
-      //   source={{uri: `https://picsum.photos/id/${item}/400/300`}}
-      //   style={{width: '100%', height: 300}}
-      // />
-      <FadeInImage uri={`https://picsum.photos/id/${item}/400/300`} />
+      <FadeInImage
+        uri={`https://picsum.photos/id/${item}/400/300`}
+        colores={colors}
+      />
     );
   };
   return (
@@ -45,7 +40,7 @@ const InfiniteScroolScreen = () => {
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           <View style={{height: 100, justifyContent: 'center'}}>
-            <ActivityIndicator color="#198754" size={40} />
+            <ActivityIndicator color={colors.primary} size={40} />
           </View>
         }
       />

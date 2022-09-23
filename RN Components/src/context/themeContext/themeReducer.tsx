@@ -1,10 +1,19 @@
 import {Theme} from '@react-navigation/native';
 
-type ThemeAction = {type: 'set_light_theme'} | {type: 'set_darK_theme'};
+type ThemeAction = {type: 'set_light_theme'} | {type: 'set_dark_theme'};
 
 export interface ThemeState extends Theme {
   currentTheme: 'light' | 'dark';
   dividerColor: string;
+  colors: {
+    primary: string;
+    secundary: string;
+    background: string;
+    card: string;
+    text: string;
+    border: string;
+    notification: string;
+  };
 }
 
 export const lightTheme: ThemeState = {
@@ -13,18 +22,37 @@ export const lightTheme: ThemeState = {
   dividerColor: 'rgba(0,0,0,0.7)',
   colors: {
     primary: '#198754',
-    background: 'lightgrey',
+    secundary: '#084F6A',
+    background: 'white',
     card: '#198754',
     text: 'black',
     border: 'black',
     notification: '#198754',
   },
 };
+
+export const darkTheme: ThemeState = {
+  currentTheme: 'dark',
+  dark: true,
+  dividerColor: 'rgba(0,0,0,0.7)',
+  colors: {
+    primary: '#084F6A',
+    secundary: '#198754',
+    background: 'black',
+    card: '#084F6A',
+    text: 'white',
+    border: 'white',
+    notification: '#198754',
+  },
+};
+
 export const themeReducer = (state: ThemeState, action: ThemeAction) => {
   switch (action.type) {
     case 'set_light_theme':
-      return lightTheme;
+      return {...lightTheme};
 
+    case 'set_dark_theme':
+      return {...darkTheme};
     default:
       return state;
   }

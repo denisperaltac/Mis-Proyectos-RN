@@ -1,10 +1,14 @@
 import {View, Text, ScrollView, RefreshControl} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import HeaderTitle from '../components/HeaderTitle';
 import styles from '../theme/appTheme';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const PullToRefreshScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -21,7 +25,7 @@ const PullToRefreshScreen = () => {
           onRefresh={onRefresh}
           progressViewOffset={50}
           // progressBackgroundColor="lightgrey"
-          colors={['green', 'red', 'blue']}
+          colors={[colors.primary, colors.secundary]}
           title="Reload"
         />
       }>
