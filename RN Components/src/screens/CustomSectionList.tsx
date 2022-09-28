@@ -4,6 +4,7 @@ import HeaderTitle from '../components/HeaderTitle';
 import styles from '../theme/appTheme';
 import ItemSeparator from '../components/ItemSeparator';
 import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface Casas {
   casa: string;
@@ -79,6 +80,7 @@ const casas: Casas[] = [
 
 const CustomSectionList = () => {
   const [largo, setLargo] = useState(0);
+  const {top} = useSafeAreaInsets();
 
   const {
     theme: {colors},
@@ -110,7 +112,18 @@ const CustomSectionList = () => {
         )}
         stickySectionHeadersEnabled // Para que el titulo se arrastre!
         renderSectionHeader={({section}) => (
-          <HeaderTitle title={section.casa} margin={10} size={25} />
+          <View style={{backgroundColor: colors.background}}>
+            <Text
+              style={{
+                fontSize: 25,
+                fontWeight: 'bold',
+                marginTop: 20 + top,
+                marginBottom: 20,
+                color: colors.primary,
+              }}>
+              {section.casa}
+            </Text>
+          </View>
         )}
         renderSectionFooter={({section}) => (
           <HeaderTitle title="End List" margin={10} size={12} />

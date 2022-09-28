@@ -19,7 +19,7 @@ export interface ThemeState extends Theme {
 export const lightTheme: ThemeState = {
   currentTheme: 'light',
   dark: false,
-  dividerColor: 'rgba(0,0,0,0.7)',
+  dividerColor: 'black',
   colors: {
     primary: '#198754',
     secundary: '#084F6A',
@@ -34,7 +34,7 @@ export const lightTheme: ThemeState = {
 export const darkTheme: ThemeState = {
   currentTheme: 'dark',
   dark: true,
-  dividerColor: 'rgba(0,0,0,0.7)',
+  dividerColor: 'white',
   colors: {
     primary: '#084F6A',
     secundary: '#198754',

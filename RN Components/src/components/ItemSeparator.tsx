@@ -4,7 +4,7 @@ import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 const ItemSeparator = () => {
   const {
-    theme: {colors},
+    theme: {colors, dividerColor},
   } = useContext(ThemeContext);
 
   return (
@@ -13,7 +13,7 @@ const ItemSeparator = () => {
         borderBottomWidth: 1,
         opacity: 0.4,
         marginVertical: 5,
-        backgroundColor: colors.primary,
+        backgroundColor: dividerColor,
       }}
     />
   );

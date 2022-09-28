@@ -28,7 +28,7 @@ const HomeScreen = () => {
                 ...styles.globalMargin,
                 ...styles.title,
                 top: top + 20,
-                marginBottom: top + 20,
+                marginBottom: top + 30,
               }}>
               Pokedex
             </Text>
